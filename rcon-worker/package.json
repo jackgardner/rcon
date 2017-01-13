@@ -1,5 +1,5 @@
 {
-  "name": "api",
+  "name": "rcon-worker",
   "version": "1.0.0",
   "description": "",
   "main": "app.js",
@@ -10,10 +10,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "restify": "^4.3.0",
+    "chance": "^1.0.4",
     "ws": "^1.1.1"
-  },
-  "devDependencies": {
-    "nodemon": "^1.11.0"
   }
 }

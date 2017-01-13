@@ -18,4 +18,19 @@ services:
       - ./api:/usr/src/app
     ports:
       - 8080:8080
+    environment:
+      - WEBSOCKET_PORT=8888
+  rcon-worker:
+    container_name: rcon-worker
+    build:
+      context: ./rcon-worker
+      dockerfile: ./Dockerfile.dev
+    depends_on:
+      - api
+    links:
+      - api
+    environment:
+      - API_URL=api:8888
+    volumes:
+      - ./rcon-worker:/usr/src/app
 
