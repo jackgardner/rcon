@@ -1,0 +1,10 @@
+FROM node:7
+MAINTAINER Jack Gardner
+
+RUN mkdir -p /usr/src/app
+WORKDIR /usr/src/app
+RUN npm install -g nodemon
+VOLUME /usr/src/app
+
+EXPOSE 3000
+CMD [ "npm", "run", "watch" ]
