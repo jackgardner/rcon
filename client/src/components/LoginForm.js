@@ -1,24 +1,53 @@
 import React, { Component } from 'react';
-import { FormControl } from 'react-bootstrap';
+import { FormControl, Button } from 'react-bootstrap';
 
 export default class LoginForm extends Component {
+  constructor () {
+    super();
+    this.state = {
+      username: '',
+      password: ''
+    };
+
+
+    this.updatePassword = this.updatePassword.bind(this);
+    this.updateUsername = this.updateUsername.bind(this);
+    this.login = this.login.bind(this);
+  }
+
+  login(event) {
+    event.preventDefault();
+    this.props.login(this.state.username, this.state.password)
+  }
+
+  updateUsername (event) {
+    this.setState({ username: event.target.value })
+  }
+
+  updatePassword (event) {
+    this.setState({ password: event.target.value })
+  }
+
   render () {
-    return <form>
+    return <form onSubmit={this.login}>
       <div className="panel panel-body login-form">
+
+        {this.props.errorMessage}
+
         <div className="text-center">
           <div className="icon-object border-warning-400 text-wraning-400"><i className="icon-people"></i></div>
           <h5 className="content-group-lg">Login <small className="display-block">Enter your credentials</small></h5>
         </div>
 
         <div className="form-group has-feedback has-feedback-left">
-          <FormControl placeholder="Username" />
+          <FormControl placeholder="Username" onChange={this.updateUsername} />
           <div className="form-control-feedback">
             <i className="icon-user text-muted"></i>
           </div>
         </div>
 
         <div className="form-group has-feedback has-feedback-left">
-          <FormControl placeholder="Password" type="password" />
+          <FormControl placeholder="Password" type="password" onChange={this.updatePassword} />
           <div className="form-control-feedback">
             <i className="icon-lock2 text-muted"></i>
           </div>
@@ -40,7 +69,9 @@ export default class LoginForm extends Component {
           </div>
 
           <div className="form-group">
-            <button type="submit" className="btn bg-pink-400 btn-block">Login <i className="icon-circle-right2 position-right"></i></button>
+            <Button type="submit" className="bg-pink-400">
+              Login <i className="icon-circle-right2 position-right"></i>
+            </Button>
           </div>
 
 

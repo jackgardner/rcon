@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "gamestalker-ef285",
+  "private_key_id": "fda29105a53043f069d4d56c2a8dce9c56c1b652",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEwAIBADANBgkqhkiG9w0BAQEFAASCBKowggSmAgEAAoIBAQDMKRydV/oqdtE4\nxmsWOPQREB0L0epn9K0Cwob7Ml5SVnW4yPwdPgngnBCX4MvVbmlBM6JwrfPKcPLF\n9PQZI1el1HlMiXitrGS70wFHDEeh554T/1Chvh4FDnVZuqhPsaONHCnThihULuE6\n0dF2ppuhMyQvImwqTXjkIK04sds4lNrKHA+OwejgNOCYq4CbNWIVfIbNTkG4A1T3\nkbdKtSvsnBvOYnaBWZfeTtLCXvk/rETG6CUjzswHAhRcQzM2FcWKm8J43cKJGbjQ\nEzvwhnjRQ1RIbDrx8FBH2QnuexTJ+Uv5Sf+MG5dq7cd7tjDwHa6aOf9AxU3AJT62\nLGq3/ekjAgMBAAECggEBAIlzqGM6px/NzQC3fcOBZrjSK2wY0QNaVN0F0NDwUVaI\nBUv6bNrXONky2W0XmMRCSLTwKY5JX1hNgPXL/EesZscr7Nqdt1TeOxfFcRe/ab7U\nbLYz77plgFqRKGrX45d8FovbiUFzElXTFip+ttJ2S1NVVigxubclX53fbiA8hkZp\npTbHzLZQ5Ra360pRMA1Axf0MBLjInMlHbBG77jyaAenzGKc4lecDzlJ67SEMUs82\nRJpNKIYkZIwZoEN0nLBfQHzMkpQ0+HbL4Aah4Jkt7NXjzgDOTdg8GiQDR0IS9bl/\n9rdPgVtQxXpglBSjX7rrn2VTntiqFbvNbgLTFGJi4ukCgYEA8Utqt5Ldr12Iw6TO\nm3zMKopbFV4XreBjhbw/CJLUgJfngx3y3gfJfe0jnZ1ez2zGM3JzwCc0+cxkEZF2\n93JkpRc/y+U3zaLA86hzqAul2I3lSc/+qXz7sqnH60pOEK9hXZ6UKuLI319HfTNf\nE2SsTgJzZ0gM1gnwOLgekG7QuFUCgYEA2JpYRl/TqF7rqvFRn17vhnOCxD2+ZHDd\nTuugkXYxMpAy32bUsa/LqBIyqlaprh34R/gv/At9Ox6rDTZHpWsStHnOC4RurW1A\nhNq/dsYPaDwTjNTIKADIe9lvmOduUXtjsdsN4J7MMKTs7SjqCsv+VA+ZCR6qcqE/\n3ky47xbHc5cCgYEAviaOnMfyR0ZQhs0TvFimlEef68DQrEeOZk+o5NrA9+29lgg9\n4lcEpGYCkSz5EEFKGDTzntPG3awCmA2oUOwnACrILagfR8AgimOPcThso7F+paJx\nr6M8vtkpIPTXfDKZaiuT3BAH+G+faLzZCfFmD7vCsfuHkg0W77u46l1JwlkCgYEA\nvk7V0nctcxh6/UVrjpgN4VaqBRuupXcYqteRy1xKG3/ggrJJnBi12eSrSUg9azL/\nytP/7PZ3QDNQ3JndVzR9Sb5fT3U6/PspndDIOmYIcW+fSbRGbAdMHqzLRU/JeKPt\n0v2A8uLyyqaNWE4DXBshSOAveHjOD0sn33wPXFnqQd8CgYEAhnvax0kOMnwk6VU5\nlY/0RKg9TM8JmL6S4eq8KjXLw+OzPTuxkJmqHlWofoF0vWU7Ra6NZ5QcgedcnzYB\nPXWttyj0vjToLA30kkkCSD8xR6IEDK5tWbQJiiW6KjgY0H86/P32OD4ItefaH7Fx\nEbvWknzJJQjhWsETYZBBoWHRK8Q=\n-----END PRIVATE KEY-----\n",
+  "client_email": "firebase-adminsdk-puiqd@gamestalker-ef285.iam.gserviceaccount.com",
+  "client_id": "112897200437947304026",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://accounts.google.com/o/oauth2/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-puiqd%40gamestalker-ef285.iam.gserviceaccount.com"
+}
