@@ -1,8 +1,8 @@
 const REPORTING_IN = 'REPORTING_IN';
-module.exports = (ws) => {
+module.exports = (primus) => {
 
   const send = (packet) => {
-    ws.send(JSON.stringify(packet));
+    primus.write(JSON.stringify(packet));
   }
 
 

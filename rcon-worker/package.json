@@ -11,6 +11,7 @@
   "license": "ISC",
   "dependencies": {
     "chance": "^1.0.4",
-    "ws": "^1.1.1"
+    "ws": "^1.1.1",
+    "primus": "^6.0.8"
   }
 }

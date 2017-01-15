@@ -1,27 +1,48 @@
 const WebSocket = require('ws');
 const { API_URL, WORKER_NAME } = process.env;
 const chance = require('chance').Chance();
+const webrcon = require('./protocol/rust-webrcon.js');
+const Primus = require('primus');
 
-const connectToApi = () => {
-  try {
-    console.log(`rcon-worker opening connection to ${API_URL}`);
-    const ws = new WebSocket(`ws://${API_URL}/`);
-    const protocol = require('./protocol')(ws);
-    ws.on('open', () => {
-      console.log('WebSocket connection successful!');
-      const workerName = WORKER_NAME || `${chance.word()}-${chance.word()}`;
-      protocol.reportIn(workerName);
-    })
 
-    ws.on('close', () => {
-      console.log('WS connection lost - attempting reconnect!');
-      setTimeout(connectToApi, 5000);
-    })
-    ws.on('message', (message) => protocol.incoming)
-  } catch (e) {
-    console.log(`Couldn't connect to API - trying again in 15 secs`)
-    setTimeout(connectToApi, 15000);
-  }
+function connect() {
+
+  var Socket = Primus.createSocket()
+   , client = new Socket('http://' + API_URL);
+   console.log("ADDRESS: " + API_URL)
+
+   const protocol = require('./protocol/master.js')(client);
+
+   client.on('open', function open() {
+    console.log('Connection is alive');
+    protocol.reportIn();
+  });
+
+   client.on('error', function error(err) {
+    console.error('Something horrible has happened', err.stack);
+  });
+
+   client.on('end', function () {
+    console.log('Connection closed');
+  });
 }
 
-connectToApi();
+setTimeout(connect, 10000);
+
+/*
+rcon = new webrcon("sadface.co.uk", 28017)
+rcon.on('connect', function() {
+    console.log("connected")
+    rcon.run("serverinfo")
+})
+rcon.on('disconnect', function() {
+    console.log('disconnected')
+})
+rcon.on('message', function(message) {
+    console.log(message.message)
+})
+rcon.on('error', function(err) {
+    console.error('error:', err)
+    rcon = null
+})
+rcon.connect("henry")*/
