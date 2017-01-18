@@ -5,29 +5,28 @@ const webrcon = require('./protocol/rust-webrcon.js');
 const Primus = require('primus');
 
 
-function connect() {
 
-  var Socket = Primus.createSocket()
-   , client = new Socket('http://' + API_URL);
-   console.log("ADDRESS: " + API_URL)
+const Socket = Primus.createSocket()
+const client = new Socket('http://' + API_URL);
 
-   const protocol = require('./protocol/master.js')(client);
 
-   client.on('open', function open() {
-    console.log('Connection is alive');
-    protocol.reportIn();
-  });
+console.log("ADDRESS: " + API_URL)
 
-   client.on('error', function error(err) {
-    console.error('Something horrible has happened', err.stack);
-  });
+const protocol = require('./protocol/master.js')(client);
 
-   client.on('end', function () {
-    console.log('Connection closed');
-  });
-}
+client.on('open', function open() {
+  console.log('Connection is alive');
+  protocol.reportIn();
+});
 
-setTimeout(connect, 10000);
+client.on('error', function error(err) {
+  console.error('Something horrible has happened', err.stack);
+});
+
+client.on('end', function () {
+  console.log('Connection closed');
+});
+
 
 /*
 rcon = new webrcon("sadface.co.uk", 28017)

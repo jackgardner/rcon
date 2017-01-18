@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { FormControl, Button } from 'react-bootstrap';
-
+import { Link } from 'react-router';
 export default class LoginForm extends Component {
   constructor () {
     super();
@@ -75,8 +75,8 @@ export default class LoginForm extends Component {
           </div>
 
 
-          {/* <div className="content-divider text-muted form-group"><span>Don't have an account?</span></div> */}
-          {/* <a href="login_registration.html" className="btn bg-slate btn-block content-group">Register</a> */}
+          <div className="content-divider text-muted form-group"><span>Don't have an account?</span></div>
+          <Link to="/register" className="btn bg-slate btn-block content-group">Register</Link>
           <span className="help-block text-center no-margin">By continuing, you're confirming that you've read our <a href="#">Terms &amp; Conditions</a> and <a href="#">Cookie Policy</a></span>
         </div>
     </form>;

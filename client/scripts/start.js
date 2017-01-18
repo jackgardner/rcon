@@ -21,6 +21,9 @@ var prompt = require('react-dev-utils/prompt');
 var pathExists = require('path-exists');
 var config = require('../config/webpack.config.dev');
 var paths = require('../config/paths');
+var EventEmitter = require('events');
+var primus = require('primus');
+var path = require('path');
 
 var useYarn = pathExists.sync(paths.yarnLockFile);
 var cli = useYarn ? 'yarn' : 'npm';
@@ -50,9 +53,18 @@ if (isSmokeTest) {
 }
 
 function setupCompiler(host, port, protocol) {
+  console.log('Setting up compiler');
+
+  const server = new EventEmitter();
+  const p = new primus(server);
+
+  p.save(path.resolve(__dirname, '../config/primus.js'));
+  console.log('Generated Primus Config');
   // "Compiler" is a low-level interface to Webpack.
   // It lets us listen to some events and provide our own custom messages.
   compiler = webpack(config, handleCompile);
+
+
 
   // "invalid" event fires when you have changed a file, and Webpack is
   // recompiling a bundle. WebpackDevServer takes care to pause serving the
