@@ -250,7 +250,7 @@
      * @param {string} command Command to run
      * @param {number=} identity Server identity, defaults to -1
      */
-    WebRcon.prototype.run = function run(command, identity) {
+    WebRcon.prototype.send = function run(command, identity) {
         this.socket.send(JSON.stringify({
             Identifier: identity === void 0 ? -1 : identity,
             Message: command,
