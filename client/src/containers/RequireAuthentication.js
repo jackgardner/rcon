@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { browserHistory } from 'react-router';
+import firebase from '../services/firebase.js';
+
 export default class RequireAuthentication extends Component {
   constructor() {
     super();
@@ -9,8 +11,6 @@ export default class RequireAuthentication extends Component {
     }
   }
   componentDidMount() {
-    const { firebase } = this.props;
-
     firebase.auth().onAuthStateChanged(user => {
       if (!user) return browserHistory.push('/login')
       this.setState({ isLoggedIn: true, user });

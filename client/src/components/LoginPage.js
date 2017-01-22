@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import LoginForm from './LoginForm';
 import { browserHistory } from 'react-router';
+import firebase from '../services/firebase';
 
 export default class LoginPage extends Component {
   constructor() {
@@ -13,8 +14,6 @@ export default class LoginPage extends Component {
   }
 
   login(username, password) {
-    const { firebase } = this.props;
-
     firebase.auth().signInWithEmailAndPassword(username, password)
       .then(() => {
         browserHistory.push('/');
