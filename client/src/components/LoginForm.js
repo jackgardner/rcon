@@ -4,14 +4,8 @@ import { Link } from 'react-router';
 export default class LoginForm extends Component {
   constructor () {
     super();
-    this.state = {
-      username: '',
-      password: ''
-    };
-
-
-    this.updatePassword = this.updatePassword.bind(this);
-    this.updateUsername = this.updateUsername.bind(this);
+    this.state = {};
+    this.onChange = this.onChange.bind(this)
     this.login = this.login.bind(this);
   }
 
@@ -20,16 +14,14 @@ export default class LoginForm extends Component {
     this.props.login(this.state.username, this.state.password)
   }
 
-  updateUsername (event) {
-    this.setState({ username: event.target.value })
+  onChange(event) {
+    const formEvent = event.target.value;
+    const state = this.state;
+    state[event.target.name] = event.target.value;
+    this.setState(state)
   }
-
-  updatePassword (event) {
-    this.setState({ password: event.target.value })
-  }
-
   render () {
-    return <form onSubmit={this.login}>
+    return <form onChange={this.onChange} onSubmit={this.login}>
       <div className="panel panel-body login-form">
 
         {this.props.errorMessage}
@@ -40,14 +32,14 @@ export default class LoginForm extends Component {
         </div>
 
         <div className="form-group has-feedback has-feedback-left">
-          <FormControl placeholder="Username" onChange={this.updateUsername} />
+          <FormControl placeholder="Username" name="username" />
           <div className="form-control-feedback">
             <i className="icon-user text-muted"></i>
           </div>
         </div>
 
         <div className="form-group has-feedback has-feedback-left">
-          <FormControl placeholder="Password" type="password" onChange={this.updatePassword} />
+          <FormControl placeholder="Password" type="password" name="password" />
           <div className="form-control-feedback">
             <i className="icon-lock2 text-muted"></i>
           </div>
@@ -55,13 +47,6 @@ export default class LoginForm extends Component {
 
         <div className="form-group login-options">
           <div className="row">
-            <div className="col-sm-6">
-              <label className="checkbox-inline">
-                <input type="checkbox" className="styled" checked="checked" />
-                  Remember
-                </label>
-              </div>
-
               <div className="col-sm-6 text-right">
                 <a href="login_password_recover.html">Forgot password?</a>
               </div>

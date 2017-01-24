@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import RegisterForm from './RegisterForm';
 import { browserHistory } from 'react-router';
+import firebase from '../../services/firebase.js';
 
 export default class RegisterPage extends Component {
   constructor() {
@@ -13,8 +14,6 @@ export default class RegisterPage extends Component {
   }
 
   register(email, password) {
-    const { firebase } = this.props;
-
     firebase.auth().createUserWithEmailAndPassword(email, password)
       .then(() => {
         browserHistory.push('/');
