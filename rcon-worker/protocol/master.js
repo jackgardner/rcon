@@ -7,14 +7,18 @@ module.exports = (primus) => {
 
 
   return {
-    reportIn: (workerName) => {
+    reportIn: (worker_name, worker_id) => {
 
-      this.workerName = workerName;
+      this.worker_name = worker_name;
       send({
-        type: REPORTING_IN,
-        max_connections: 100,
-        worker_type: 'rcon/generic',
-        worker_name: workerName
+        action: "worker/register",
+        data: {
+          type: REPORTING_IN,
+          max_connections: 100,
+          worker_type: 'rcon/generic',
+          worker_name: worker_name,
+          worker_id: worker_id
+        }
       })
     },
     incoming: msg => console.log(msg),

@@ -1,10 +1,18 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
 import { Navbar, Nav, NavItem, MenuItem, NavDropdown } from 'react-bootstrap';
+import ApiConnection from '../lib/websocket'
 
 export default class ApplicationNav extends Component {
+
+  componentDidMount() {
+    const { user } = this.props;
+    ApiConnection.init(user.uid);
+  }
+
   render () {
     const { user } = this.props;
+    console.log(user);
     return <Navbar fluid className="header-highlight">
         <Navbar.Header>
           <Navbar.Brand>Gamestalker</Navbar.Brand>

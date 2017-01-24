@@ -8,6 +8,7 @@ module.exports = (x) => {
     },
     get: (key) => {
     	return _data[key];
-    }
+    },
+    all: () => { return _data; }
   }
 }

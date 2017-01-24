@@ -4,27 +4,52 @@ const server = restify.createServer();
 const Primus = require('primus');
 const port = process.env.PORT || 8080;
 const routes = require('./routes');
+const workers = require('./managers/worker-pool')();
+
+const controllers = {
+    "worker": require('./controllers/worker')(workers)
+}
+
+const client_controllers = {
+    "rcon": require('./controllers/rcon')(workers)
+}
+
 
 routes(server);
 
 const primus = new Primus(server);
 
 primus.on('connection', function (spark) {
-  	console.log("New connection");
-  	spark.on('data', function message(data) {
-  		console.log(data);
-      	console.log("Got message:", JSON.parse(data));
+  	console.log("API: New worker connection");
+  	spark.on('data', function message(rawData) {
 
-      	//Send back a test message
-      	//"sadface.co.uk" 28017 henry
-      	// Fake server id currently
-      	spark.write(JSON.stringify({ action: "rcon/connect", data: {id : 1234, host: "sadface.co.uk", port: 28017, password:"henry"}}));
+      var data = JSON.parse(rawData);
 
-      	// No connected event being sent back yet, just wait and try sending a command down the rcon connection
-      	setInterval(function(){
-		  spark.write(JSON.stringify({ action: "rcon/send", data: {id : 1234, command: "serverinfo"}}));
-		}, 10000);
+      if(data.action) {
+        var parts = data.action.split('/');
+        controllers[parts[0]][parts[1]](data.data, spark);
+      } else {
+        console.log("API: Unrecognised data recieved");
+        console.log(data);
+      }
 	});
 });
 
 server.listen(port, () => console.log(`${server.name} listening at ${server.url}`));
+
+
+// Create a seperate primus socket for use for the front end
+
+var frontendPrimus = Primus.createServer(function connection(spark) {
+  //on connect
+  console.log("API: New frontend connection");
+
+  spark.on('data', function message(data) {
+    console.log("API: Client data recieved");
+
+    var obj = JSON.parse(data);
+    var parts = obj.action.split('/');
+    client_controllers[parts[0]][parts[1]](obj.data, spark);
+
+  });
+}, { port: 9090, transformer: 'websockets' });

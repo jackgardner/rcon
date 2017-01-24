@@ -8,10 +8,10 @@ import { Router, Route, browserHistory } from 'react-router';
 import RequireAuthentication from './containers/RequireAuthentication';
 import * as firebase from 'firebase';
 
-import primusClient from '../config/primus';
+/*import primusClient from '../config/primus';
 
 
-primusClient.connect('http://localhost:8080')
+primusClient.connect('http://localhost:8080')*/
 
 const firebaseConfig = {
   apiKey: "AIzaSyAfINhgtzSOFR20cmX6bDJe_E3jF9JN2x8",
