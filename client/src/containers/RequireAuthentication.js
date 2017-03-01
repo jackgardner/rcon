@@ -1,29 +1,39 @@
-import React, { Component } from 'react';
+import React, { PropTypes, Component } from 'react';
 import { browserHistory } from 'react-router';
-import firebase from '../services/firebase.js';
+import { connect } from 'react-redux';
+import { firebaseConnect } from  'react-redux-firebase';
+import { helpers } from 'react-redux-firebase';
+const { pathToJS } = helpers;
 
-export default class RequireAuthentication extends Component {
-  constructor() {
-    super();
+class RequireAuthentication extends Component {
+  static propTypes = {
+    auth: PropTypes.object,
+  };
+  static contextTypes = {
+    router: React.PropTypes.object.isRequired
+  };
 
-    this.state = {
-      isLoggedIn: false
+
+  componentWillMount() {
+    const { auth, isAuthenticating } = this.props;
+    console.log('auth', isAuthenticating);
+    console.log(this.context);
+    if (!isAuthenticating && auth && !auth.uid) {
+      this.context.router.push('/login');
     }
   }
-  componentDidMount() {
-    firebase.auth().onAuthStateChanged(user => {
-      if (!user) return browserHistory.push('/login')
-      this.setState({ isLoggedIn: true, user });
-    });
-  }
-
   render() {
-    const { isLoggedIn } = this.state;
-
-    if (isLoggedIn) {
-      return <div>{React.Children.map(this.props.children, child => React.cloneElement(child, { user: this.state.user }))}</div>
-    } else {
-      return null;
-    }
+    return <div>{this.props.children}</div>
   }
 }
+
+const mapStateToProps = state => {
+  return {
+    auth: pathToJS(state.firebase, 'auth'),
+    isAuthenticating: pathToJS(state.firebase, 'isInitializing') === true,
+  }
+};
+
+export default connect(
+  mapStateToProps,
+)(RequireAuthentication);

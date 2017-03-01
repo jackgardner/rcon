@@ -1,5 +1,13 @@
 version: "2"
 services:
+  postgres:
+    container_name: db
+    image: mdillon/postgis
+    ports:
+      - 5432:5432
+    volumes:
+      - ./pg_data:/var/lib/postgresql/data
+      - ./pg_scripts:/docker-entrypoint-initdb.d
   client:
     container_name: frontend
     build:
@@ -16,11 +24,14 @@ services:
       dockerfile: ./Dockerfile.dev
     volumes:
       - ./api:/usr/src/app
+    links:
+      - postgres:postgres
     ports:
       - 8080:8080
       - 9090:9090
     environment:
       - WEBSOCKET_PORT=8080
+      - DATABASE_URL=postgres://postgres:postgres@postgres/api
   rcon-worker:
     container_name: rcon-worker
     build:

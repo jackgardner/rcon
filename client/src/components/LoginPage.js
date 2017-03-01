@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
 import LoginForm from './LoginForm';
 import { browserHistory } from 'react-router';
-import firebase from '../services/firebase';
 
 export default class LoginPage extends Component {
+  static contextTypes = {
+    router: React.PropTypes.object.isRequired
+  };
+
   constructor() {
     super();
     this.state = {
@@ -14,29 +17,28 @@ export default class LoginPage extends Component {
   }
 
   login(username, password) {
-    firebase.auth().signInWithEmailAndPassword(username, password)
+    const { firebase } = this.props;
+    firebase.login({ email: username, password })
       .then(() => {
-        browserHistory.push('/');
+        this.context.router.push('/');
       })
       .catch((error) => {
-      const errorCode = error.code;
-      const errorMessage = error.message;
+        const errorCode = error.code;
+        const errorMessage = error.message;
 
-      this.setState({ errorCode, errorMessage });
-    });
+        this.setState({ errorCode, errorMessage });
+      });
   }
 
   render() {
-    return <div className="login-container bg-slate-800">
-        <div className="page-container">
-          <div className="page-content">
-            <div className="content-wrapper">
-              <div className="content">
-                <LoginForm errorMessage={this.state.errorMessage} login={this.login}/>
-              </div>
-            </div>
+    return <div className="login-container">
+      <div className="page-container">
+        <div className="page-content">
+          <div className="content-wrapper">
+            <LoginForm errorMessage={this.state.errorMessage} login={this.login}/>
           </div>
         </div>
       </div>
+    </div>
   }
 }

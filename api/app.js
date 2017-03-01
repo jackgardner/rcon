@@ -1,7 +1,7 @@
-const restify = require('restify');
-const WebSocket = require('ws');
+import restify from 'restify'
+import Primus from 'primus'
+
 const server = restify.createServer();
-const Primus = require('primus');
 const port = process.env.PORT || 8080;
 const routes = require('./routes');
 const workers = require('./managers/worker-pool')();
@@ -13,9 +13,6 @@ const controllers = {
 const client_controllers = {
     "rcon": require('./controllers/rcon')(workers)
 }
-
-
-routes(server);
 
 const primus = new Primus(server);
 

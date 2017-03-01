@@ -1,53 +1,33 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router';
-import { Navbar, Nav, NavItem, MenuItem, NavDropdown } from 'react-bootstrap';
 import ApiConnection from '../lib/websocket'
+import { Navbar, Nav, MenuItem, NavDropdown } from 'react-bootstrap';
 
 export default class ApplicationNav extends Component {
-
   componentDidMount() {
     const { user } = this.props;
     ApiConnection.init(user.uid);
   }
-
-  render () {
+  render() {
     const { user } = this.props;
-    console.log(user);
-    return <Navbar fluid className="header-highlight">
-        <Navbar.Header>
-          <Navbar.Brand>Gamestalker</Navbar.Brand>
-        </Navbar.Header>
-        <Nav pullRight>
-          <p className="navbar-text">
-            <span>Hello, {user.email}</span>
-            <span className="text-sm"><Link to="/logout">Logout</Link></span>
-          </p>
-          <p className="navbar-text">
-            <span className="label bg-success">Online</span>
-          </p>
-          {/* <NavDropdown eventKey={2} title="Hello" id="menu">
-            <MenuItem>Hello, {user.email}</MenuItem>
-          </NavDropdown> */}
-        </Nav>
+    if (!user) return null;
 
+    return <Navbar className="navbar-inverse">
+      <Navbar.Header>
+        <Navbar.Brand>
+          <Navbar.Text><h4>Gamestalker</h4></Navbar.Text>
+        </Navbar.Brand>
+      </Navbar.Header>
+      <Nav pullRight>
+        <Navbar.Text className="navbar-text">
+          <p>Hello, {user.email}</p>
+        </Navbar.Text>
+        <Navbar.Text>
+          <span className="text-sm"><Link to="/logout">Logout</Link></span>
+        </Navbar.Text>
+        <Navbar.Text className="navbar-text">
+          <span className="label bg-success">Online</span>
+        </Navbar.Text>
+      </Nav>
     </Navbar>;
-    //return <div className="navbar navbar-default header-highlight">
-    //  <div className="navbar-header">
-    //    <a className="navbar-brand">
-
-    //    </a>
-    //  </div>
-    //  <div className="navbar-collapse collapse" id="navbar-mobile">
-    //    <ul className="nav navbar-nav">
-    //      <li><a className="sidebar-control sidebar-main-toggle hidden-xs legitRipple"><i className="icon-paragraph-justify3"></i></a></li>
-
-    //    </ul>
-
-    //    <div className="navbar-right">
-    //      <p className="navbar-text">{user.email}</p>
-    //      <p className="navbar-text"><span className="label bg-success">Online</span></p>
-    //    </div>
-    //  </div>
-    //</div>
   }
 }
